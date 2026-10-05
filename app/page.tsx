@@ -7,7 +7,7 @@ import { Signature } from "@/components/signature";
 
 const CONTACT = {
   location: "Manikganj, Dhaka, Bangladesh",
-  email: { label: "rafiqul@email.com", href: "mailto:rafiqul@email.com" },
+  email: { label: "hi@rafiq.cc", href: "mailto:hi@rafiq.cc" },
   site: { label: "rafiqulislam.design", href: "https://rafiqulislam.design" },
 };
 
