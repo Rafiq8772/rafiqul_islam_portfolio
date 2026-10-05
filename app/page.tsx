@@ -6,7 +6,7 @@ import { Reveal } from "@/components/reveal";
 import { Signature } from "@/components/signature";
 
 const CONTACT = {
-  location: "San Francisco, CA, USA",
+  location: "Manikganj, Dhaka, Bangladesh",
   email: { label: "rafiqul@email.com", href: "mailto:rafiqul@email.com" },
   site: { label: "rafiqulislam.design", href: "https://rafiqulislam.design" },
 };
