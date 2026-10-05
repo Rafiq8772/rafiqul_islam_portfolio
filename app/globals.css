@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #222222;
+  --color-muted: #909090;
+  --color-mint: #4db8ab;
+  --color-hairline: rgba(144, 144, 144, 0.2);
+  --color-dock: #d6d6d6;
+
+  --font-sans: var(--font-figtree), sans-serif;
+
+  /* Framer's own breakpoints, from the target's image `sizes` attribute. */
+  --breakpoint-tab: 810px;
+  --breakpoint-desk: 1200px;
+
+  --shadow-dock: 0 0.602187px 0.602187px -1.25px rgba(0, 0, 0, 0.18),
+    0 2.28853px 2.28853px -2.5px rgba(0, 0, 0, 0.16),
+    0 10px 10px -3.75px rgba(0, 0, 0, 0.063);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Type ramp measured off the target. Defined once so the tracking values
+   live in a single place rather than at ~20 call sites each. */
+@utility type-label {
+  font-size: 14px;
+  line-height: 19.6px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility type-h3 {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+@utility type-stat {
+  font-size: 32px;
+  line-height: 35.2px;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+}
+
+@utility type-body {
+  font-size: 16px;
+  line-height: 27.2px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+}
+
+@utility type-meta {
+  font-size: 14px;
+  line-height: 19.6px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+}
+
+@utility type-contact {
+  font-size: 15px;
+  line-height: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* Below 810 the target drops to a smaller ramp. Overriding the utilities keeps
+   every call site unchanged. */
+@media (max-width: 809.98px) {
+  .type-h3 {
+    font-size: 16px;
+    line-height: 20.8px;
+    letter-spacing: -0.32px;
+  }
+
+  .type-body {
+    font-size: 14px;
+    line-height: 23.8px;
+    letter-spacing: -0.28px;
+  }
+
+  .type-stat {
+    font-size: 28px;
+    line-height: 30.8px;
+    letter-spacing: -0.56px;
   }
 }
 
+/* 810-1199 keeps the desktop body ramp but steps the headings down. */
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .type-h3 {
+    font-size: 18px;
+    line-height: 23.4px;
+    letter-spacing: -0.36px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* The "LUKE STONE" ring turns continuously, ~12s per revolution. */
+@keyframes spin-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-ring {
+  animation: spin-ring 12s linear infinite;
+}
+
+/* Marquee: two identical halves translated -50%. The trailing gap lives
+   inside each half (pr on the half, not gap-x on the track) so the wrap
+   point lands exactly on an item edge instead of mid-gap. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-ring {
+    animation: none;
+  }
 }

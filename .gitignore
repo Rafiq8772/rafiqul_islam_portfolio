@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright mcp scratch output
+/.playwright-mcp/
+
+# recorded comparison videos
+/recordings/
